@@ -19,7 +19,7 @@ enum AccountType {
 
 
 class BankAccount {
-    
+ ////Savings and Checking will be a subclass of BankAccount and not an enum  // Nothing has to be different
     
     
     var identifier: String

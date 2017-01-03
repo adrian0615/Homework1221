@@ -23,17 +23,14 @@ class Person {
     
 }
 
-enum CustomerType {
-    case employee
-    case regular
-}
 
 
-class Customer : Person {
-    var customerType: CustomerType
+
+class Customer : Person, Equatable {
     var email: String
-    init(firstName: String, lastName: String, customerType: CustomerType, email: String) {
-        self.customerType = customerType
+    
+    
+    init(firstName: String, lastName: String, email: String) {
         self.email = email
         super.init(firstName: firstName, lastName: lastName)
     }
