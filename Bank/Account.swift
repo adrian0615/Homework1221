@@ -9,46 +9,78 @@
 import Foundation
 
 
-enum AccountType {
-    case checking
-    case savings
-    
-}
+
     
 
 
 
-class BankAccount {
- ////Savings and Checking will be a subclass of BankAccount and not an enum  // Nothing has to be different
+class BankAccount: Equatable {
     
+    public static func == (lhs: BankAccount, rhs: BankAccount) -> Bool {
+        return lhs.identifier == rhs.identifier && lhs.balance == rhs.balance
+    }
     
-    var identifier: String
-    let accountType: AccountType
+    var identifier: Int
     var balance: Double
     
     
-    init(identifier: String, accountType: AccountType, balance: Double) {
+    init(identifier: Int, balance: Double) {
         self.identifier = identifier
-        self.accountType = accountType
         self.balance = balance
+    }
+    
         
-        
-        
-        func depositFunds(identifier: String, accountType: AccountType, deposit: Double) -> BankAccount {
+        func depositFunds(identify: Int, deposit: Double) -> BankAccount? {
+            var bankAccount: BankAccount? = nil
+            
+            if identify == identifier {
             let existingBalance = balance
             let newBalance = existingBalance + deposit
-            return BankAccount(identifier: identifier, accountType: accountType, balance: newBalance)
+                bankAccount = BankAccount(identifier: identifier, balance: newBalance)
+            } else {
+                print("You did not enter a correct identifier.  Try again.")
+            }
+            return bankAccount
         }
         
-        func withdrawFunds(identifier: String, accountType: AccountType, withdrawal: Double) -> BankAccount {
-            let existingBalance = balance
-            let newBalance = existingBalance - withdrawal
-            return BankAccount(identifier: identifier, accountType: accountType, balance: newBalance)
+        func withdrawFunds(identify: Int, withdrawal: Double) -> BankAccount? {
+            var bankAccount: BankAccount? = nil
+            
+            if identify == identifier {
+                let existingBalance = balance
+                let newBalance = existingBalance - withdrawal
+                bankAccount = BankAccount(identifier: identifier, balance: newBalance)
+            } else {
+                print("You did not enter a correct identifier.  Try again.")
+            }
+            return bankAccount
         }
         
-        func requestBalance(identifer: String, accountType: AccountType) -> BankAccount {
-            return BankAccount(identifier: identifier, accountType: accountType, balance: balance)
-        }
+        func requestBalance(identify: Int) -> Double? {
+            var accountBalance: Double? = nil
+            var bankAccount: BankAccount
+            
+            if identify == identifier {
+            bankAccount = BankAccount(identifier: identifier, balance: balance)
+            accountBalance = bankAccount.balance
+            } else {
+                print("You did not enter a correct identifier.  Try again.")
+            }
+            return accountBalance
+    }
+}
+
+class Savings: BankAccount {
+    
+    override init(identifier: Int, balance: Double) {
+        super.init(identifier: identifier, balance: balance)
+    }
+}
+
+class Checking: BankAccount {
+    
+    override init(identifier: Int, balance: Double) {
+        super.init(identifier: identifier, balance: balance)
     }
 }
 

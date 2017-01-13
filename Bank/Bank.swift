@@ -9,24 +9,51 @@
 import Foundation
 
 
-class Bank {
+class Bank : Equatable {
+    
+    public static func == (lhs: Bank, rhs: Bank) -> Bool {
+        return lhs.address == rhs.address && lhs.employees == rhs.employees && lhs.customers == rhs.customers && lhs.bankAccounts == rhs.bankAccounts
+    }
     
     var address: String
-    var employees: [Person]
-    var totalDeposit: Double
-    var bankAccounts: [Customer: BankAccount]
+    var employees: [Employee]
+    var customers: [Customer]
+    var bankAccounts: [BankAccount]
     
-    init(address: String, employees: [Person], totalDeposit: Double, bankAccounts: [Customer: BankAccount]) {
+    init(address: String, employees: [Employee], customers: [Customer], bankAccounts: [BankAccount]) {
         self.address = address
         self.customers = customers
         self.employees = employees
-        self.totalDeposit = totalDeposit
         self.bankAccounts = bankAccounts
     }
     
-    func addACustomer(firstName: String, lastName: String, email: String) -> [Customer] {
-        var newAccount
+    
+    func addCustomer(firstName: String, lastName: String, email: String, bankAccount: BankAccount) -> Bank {
+        let bank = Bank(address: address, employees: employees, customers: customers, bankAccounts: bankAccounts)
+        
+        let newCustomer = Customer(firstName: firstName, lastName: lastName, email: email, accounts: [])
+        newCustomer.accounts.append(bankAccount)
+        bank.customers.append(newCustomer)
+        bank.bankAccounts.append(bankAccount)
+        
+        return bank
+    }
+    
+    func totalDeposit(accounts: [BankAccount]) -> Double? {
+        var balanceList: [Double] = []
+        var balance: Double? = nil
+        
+        for account in accounts {
+            balanceList.append(account.balance)
+            balance = balanceList.reduce(0, +)
+        }
+        return balance
+    }
+    
+    
 }
+
+
 
 
 
