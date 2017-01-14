@@ -12,98 +12,132 @@ import XCTest
 class BankAccountTests: XCTestCase {
     
     func testDepositFunds() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 100.00)
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 100.00, transactions: [])
         
         let test = bankAccount.depositFunds(identify: 123, deposit: 25.50)
         
-        let expected: BankAccount = BankAccount(identifier: 123, balance: 125.50)
+        let expected: BankAccount = BankAccount(identifier: 123, balance: 125.50, transactions: [Transaction(amount: 25.50, vendorName: "self")])
         
-        XCTAssertEqual(test, expected)
+        XCTAssertEqual(test?.balance, expected.balance)
 
     }
     
     
     func testDepositFunds2() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00)
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00, transactions: [])
         
         let test = bankAccount.depositFunds(identify: 123, deposit: 500.00)
         
-        let expected: BankAccount = BankAccount(identifier: 123, balance: 650.00)
+        let expected: BankAccount = BankAccount(identifier: 123, balance: 650.00, transactions: [Transaction(amount: 500.00, vendorName: "self")])
         
-        XCTAssertEqual(test, expected)
+        XCTAssertEqual(test?.balance, expected.balance)
         
     }
     
-    func testNotDepositFunds() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00)
+    func testDepositFundsRightID() {
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00, transactions: [])
         
         let test = bankAccount.depositFunds(identify: 123, deposit: 500.00)
         
-        let expected: BankAccount = BankAccount(identifier: 123, balance: 550.20)
+        let expected: BankAccount = BankAccount(identifier: 123, balance: 650.00, transactions: [Transaction(amount: 500.00, vendorName: "self")])
         
-        XCTAssertNotEqual(test, expected)
+        XCTAssertEqual(test?.identifier, expected.identifier)
+        
+    }
+    
+    func testNotDepositFundsWrongBalance1() {
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00, transactions: [])
+        
+        let test = bankAccount.depositFunds(identify: 123, deposit: 500.00)
+        
+        let expected: BankAccount = BankAccount(identifier: 123, balance: 550.20, transactions: [Transaction(amount: 500.00, vendorName: "self")])
+        
+        XCTAssertNotEqual(test?.balance, expected.balance)
+        
+    }
+    
+    func testNotDepositFundsWrongBalance() {
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00, transactions: [])
+        
+        let test = bankAccount.depositFunds(identify: 123, deposit: 500.00)
+        
+        let expected: BankAccount = BankAccount(identifier: 123, balance: 200.00, transactions: [Transaction(amount: 500.00, vendorName: "self")])
+        
+        XCTAssertNotEqual(test?.balance, expected.balance)
         
     }
     
     func testNotDepositFundsWrongID() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00)
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00, transactions: [])
         
         let test = bankAccount.depositFunds(identify: 123, deposit: 500.00)
         
-        let expected: BankAccount = BankAccount(identifier: 324, balance: 550.00)
+        let expected: BankAccount = BankAccount(identifier: 324, balance: 650.00, transactions: [Transaction(amount: 500.00, vendorName: "self")])
+        
+        XCTAssertNotEqual(test?.identifier, expected.identifier)
+        
+    }
+    
+    func testNotDepositFundsWrongTransactionAmount() {
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00, transactions: [])
+        
+        let test = bankAccount.depositFunds(identify: 123, deposit: 500.00)
+        
+        let expected: BankAccount = BankAccount(identifier: 123, balance: 650.00, transactions: [Transaction(amount: 400.00, vendorName: "self")])
         
         XCTAssertNotEqual(test, expected)
         
     }
     
     
-    func testWithdrawFunds() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00)
+    func testWithdrawFundsBalance() {
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00, transactions: [])
         
         let test = bankAccount.withdrawFunds(identify: 123, withdrawal: 50.00)
         
-        let expected: BankAccount = BankAccount(identifier: 123, balance: 100.00)
+        let expected: BankAccount = BankAccount(identifier: 123, balance: 100.00, transactions: [Transaction(amount: -50.00, vendorName: "self")])
         
-        XCTAssertEqual(test, expected)
+        XCTAssertEqual(test?.balance, expected.balance)
         
     }
     
     
-    func testWithdrawFunds2() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 2000.50)
+    func testWithdrawFundsBalance2() {
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 2000.50, transactions: [])
         
         let test = bankAccount.withdrawFunds(identify: 123, withdrawal: 100.00)
         
-        let expected: BankAccount = BankAccount(identifier: 123, balance: 1900.50)
+        let expected: BankAccount = BankAccount(identifier: 123, balance: 1900.50, transactions: [Transaction(amount: -100.00, vendorName: "self")])
         
-        XCTAssertEqual(test, expected)
+        XCTAssertEqual(test?.balance, expected.balance)
         
     }
     
-    func testNotWithdrawFunds() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 2000.00)
+    func testNotWithdrawFundsWrongBalance() {
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 2000.00, transactions: [])
         
         let test = bankAccount.withdrawFunds(identify: 123, withdrawal: 1999.98)
         
-        let expected: BankAccount = BankAccount(identifier: 123, balance: 500.00)
+        let expected: BankAccount = BankAccount(identifier: 123, balance: 500.00, transactions: [Transaction(amount: -1999.98, vendorName: "self")])
         
-        XCTAssertNotEqual(test, expected)
+        XCTAssertNotEqual(test?.balance, expected.balance)
         
     }
     
     func testNotWithdrawFundsWrongID() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00)
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 150.00, transactions: [])
         
         let test = bankAccount.withdrawFunds(identify: 123, withdrawal: 50.00)
         
-        let expected: BankAccount = BankAccount(identifier: 563, balance: 100.00)
+        let expected: BankAccount = BankAccount(identifier: 563, balance: 100.00, transactions: [Transaction(amount: -50.00, vendorName: "self")])
         
-        XCTAssertNotEqual(test, expected)
+        XCTAssertNotEqual(test?.identifier, expected.identifier)
         
     }
     
+    
     func testRequestBalance() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 2000.50)
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 2000.50, transactions: [])
         
         let test = bankAccount.requestBalance(identify: 123)
         
@@ -114,7 +148,7 @@ class BankAccountTests: XCTestCase {
     }
     
     func testRequestBalance2() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 1230.50)
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 1230.50, transactions: [])
         
         let test = bankAccount.requestBalance(identify: 123)
         
@@ -125,7 +159,7 @@ class BankAccountTests: XCTestCase {
     }
     
     func testNotRequestBalance() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 1230.50)
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 1230.50, transactions: [])
         
         let test = bankAccount.requestBalance(identify: 123)
         
@@ -136,7 +170,7 @@ class BankAccountTests: XCTestCase {
     }
     
     func testNotRequestBalanceWrongID() {
-        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 1230.50)
+        let bankAccount: BankAccount = BankAccount(identifier: 123, balance: 1230.50, transactions: [])
         
         let test = bankAccount.requestBalance(identify: 789)
         

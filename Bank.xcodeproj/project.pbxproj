@@ -17,6 +17,7 @@
 		07E6CE471E09B66A0076353A /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E6CE461E09B66A0076353A /* Bank.swift */; };
 		07E6CE491E09B8AF0076353A /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E6CE481E09B8AF0076353A /* Person.swift */; };
 		07E6CE4B1E09BB060076353A /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E6CE4A1E09BB060076353A /* Account.swift */; };
+		07FFA1671E29A31400D4D7F3 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FFA1661E29A31400D4D7F3 /* Transaction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		07E6CE461E09B66A0076353A /* Bank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 		07E6CE481E09B8AF0076353A /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		07E6CE4A1E09BB060076353A /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		07FFA1661E29A31400D4D7F3 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,9 +89,10 @@
 			children = (
 				07E6CE2F1E09B6510076353A /* Bank.h */,
 				07E6CE301E09B6510076353A /* Info.plist */,
-				07E6CE4A1E09BB060076353A /* Account.swift */,
 				07E6CE461E09B66A0076353A /* Bank.swift */,
 				07E6CE481E09B8AF0076353A /* Person.swift */,
+				07E6CE4A1E09BB060076353A /* Account.swift */,
+				07FFA1661E29A31400D4D7F3 /* Transaction.swift */,
 				07E52AE91E28865F0032B03D /* JSON.swift */,
 			);
 			path = Bank;
@@ -220,6 +223,7 @@
 			files = (
 				07E6CE491E09B8AF0076353A /* Person.swift in Sources */,
 				07E6CE4B1E09BB060076353A /* Account.swift in Sources */,
+				07FFA1671E29A31400D4D7F3 /* Transaction.swift in Sources */,
 				07E6CE471E09B66A0076353A /* Bank.swift in Sources */,
 				07E52AEA1E28865F0032B03D /* JSON.swift in Sources */,
 			);

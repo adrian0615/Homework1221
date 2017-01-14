@@ -11,7 +11,7 @@ import XCTest
 
 class JSONTests: XCTestCase {
 
-    func testMakeDictionary() {
+    /*func testMakeDictionary() {
         
     let aBank: Bank = Bank(address: "123", employees: [Employee(firstName: "John", lastName: "Johnson"), Employee(firstName: "James", lastName: "Jameson")], customers: [Customer(firstName: "Richard", lastName: "Richardson", email: "r@r.com", accounts: [Checking(identifier: 321, balance: 225.24)])], bankAccounts: [Checking(identifier: 321, balance: 225.24)])
         
@@ -21,5 +21,5 @@ class JSONTests: XCTestCase {
         
         print(test)
         
-    }
+    }*/
 }
