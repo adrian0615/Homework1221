@@ -11,15 +11,16 @@ import XCTest
 
 class JSONTests: XCTestCase {
 
-    /*func testMakeDictionary() {
+    func testJSON() {
         
-    let aBank: Bank = Bank(address: "123", employees: [Employee(firstName: "John", lastName: "Johnson"), Employee(firstName: "James", lastName: "Jameson")], customers: [Customer(firstName: "Richard", lastName: "Richardson", email: "r@r.com", accounts: [Checking(identifier: 321, balance: 225.24)])], bankAccounts: [Checking(identifier: 321, balance: 225.24)])
+    let aBank: Bank = Bank(address: "123", employees: [Employee(firstName: "John", lastName: "Johnson"), Employee(firstName: "James", lastName: "Jameson")], customers: [Customer(firstName: "Richard", lastName: "Richardson", email: "r@r.com", accounts: [Savings(identifier: 123, balance: 425.00, transactions: []),Checking(identifier: 321, balance: 225.24, transactions: [])]), Customer(firstName: "Tom", lastName: "Thompson", email: "t@t.com", accounts: [Checking(identifier: 456, balance: 500.00, transactions: [])])], bankAccounts: [Savings(identifier: 123, balance: 425.00, transactions: []),Checking(identifier: 321, balance: 225.24, transactions: []), Checking(identifier: 456, balance: 500.00, transactions: [])])
         
         let json = Json()
         
-        let test = json.makeDictionary(bank: aBank)
+        let dictTest = json.makeJSONAble(bank: aBank, bankAccounts: aBank.bankAccounts)
+        print("--------------------------")
         
-        print(test)
+        json.jsonTransfer(jsonDict: dictTest)
         
-    }*/
+    }
 }

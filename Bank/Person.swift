@@ -42,6 +42,7 @@ class Customer : Person, Equatable {
         super.init(firstName: firstName, lastName: lastName)
     }
     
+    
     func listAccounts(identify: String) -> [BankAccount]? {
         var bankAccounts:[BankAccount] = []
         

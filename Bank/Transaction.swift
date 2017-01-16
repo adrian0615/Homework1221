@@ -40,4 +40,5 @@ class Transaction :  Equatable {
             return TransactionType.noTransaction
         }
     }
+    
 }
